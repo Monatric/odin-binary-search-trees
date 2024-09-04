@@ -1,0 +1,2 @@
+**Binary Search Trees**
+Group of data items, turning them into nodes, and making a tree composed of nodes. This works in a sorted group of data, typically integer items. A tree starts with a root node, and every node consists either a left, right, both, or no nodes, with left node being lower than the root node, and the right node being higher than the root node.
