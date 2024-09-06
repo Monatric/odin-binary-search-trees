@@ -43,17 +43,20 @@ class Tree
   end
 
   def delete(x, current_node = @root)
-    # case 2: one child
+    return if current_node.nil?
 
-    # case 1: leaf node
     if current_node.data == x
-      if current_node.right.nil? && current_node.left.nil?
-        current_node = nil
-        return
-      elsif current_node.left.nil?
+      if current_node.left.nil?
         return current_node = current_node.right
       elsif current_node.right.nil?
         return current_node = current_node.left
+      else
+        succ = current_node.right
+        succ = succ.left until succ.left.nil?
+
+        current_node.data = succ.data
+        current_node.right = delete(succ.data, current_node.right)
+        return current_node
       end
     end
 
