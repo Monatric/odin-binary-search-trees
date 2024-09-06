@@ -6,3 +6,4 @@ test = Tree.new(arr)
 test.insert(0)
 test.delete(8)
 test.pretty_print
+p test.find(55)
