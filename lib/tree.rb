@@ -42,10 +42,10 @@ class Tree
     current_node
   end
 
-  def delete(x, current_node = @root)
+  def delete(value, current_node = @root)
     return if current_node.nil?
 
-    if current_node.data == x
+    if current_node.data == value
       if current_node.left.nil?
         return current_node = current_node.right
       elsif current_node.right.nil?
@@ -60,10 +60,10 @@ class Tree
       end
     end
 
-    if current_node.data > x
-      current_node.left = delete(x, current_node.left)
+    if current_node.data > value
+      current_node.left = delete(value, current_node.left)
     else
-      current_node.right = delete(x, current_node.right)
+      current_node.right = delete(value, current_node.right)
     end
 
     current_node
