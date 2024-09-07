@@ -6,4 +6,5 @@ test = Tree.new(arr)
 test.insert(0)
 test.delete(8)
 test.pretty_print
-p test.find(55)
+# p test.root.right
+p test.level_order

@@ -82,4 +82,17 @@ class Tree
       current_node.right = find(value, current_node.right)
     end
   end
+
+  def level_order(current_node = @root, values = [])
+    queue = []
+    queue.push(current_node)
+    until queue.empty?
+      front = queue[0]
+      values << front.data
+      queue.push(front.left) unless front.left.nil?
+      queue.push(front.right) unless front.right.nil?
+      queue.shift
+    end
+    values
+  end
 end
