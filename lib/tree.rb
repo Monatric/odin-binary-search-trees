@@ -28,15 +28,15 @@ class Tree
     pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
   end
 
-  def insert(x, current_node = @root)
-    return Node.new(x) if current_node.nil?
+  def insert(value, current_node = @root)
+    return Node.new(value) if current_node.nil?
 
-    return current_node if x == current_node.data
+    return current_node if value == current_node.data
 
-    if current_node.data > x
-      current_node.left = insert(x, current_node.left)
+    if current_node.data > value
+      current_node.left = insert(value, current_node.left)
     else
-      current_node.right = insert(x, current_node.right)
+      current_node.right = insert(value, current_node.right)
     end
 
     current_node
