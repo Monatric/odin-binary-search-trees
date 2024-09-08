@@ -83,38 +83,39 @@ class Tree
     end
   end
 
-  def level_order(current_node = @root, values = [])
-    # iteration version
-    queue = []
-    queue.push(current_node)
-    until queue.empty?
-      front = queue[0]
-      if block_given?
-        yield(front)
-      else
-        values << front.data
-      end
+  # def level_order(current_node = @root, values = [])
+  #   # iteration version
+  #   queue = []
+  #   queue.push(current_node)
+  #   until queue.empty?
+  #     front = queue[0]
+  #     if block_given?
+  #       yield(front)
+  #     else
+  #       values << front.data
+  #     end
+  #     queue.push(front.left) unless front.left.nil?
+  #     queue.push(front.right) unless front.right.nil?
+  #     queue.shift
+  #   end
+  #   values unless block_given?
+  # end
+
+  def level_order(current_node = @root, queue = [@root], values = [], &block)
+    # recursive version
+    return values if current_node.nil?
+
+    front = queue[0]
+    values << front.data unless front.nil?
+    unless queue.empty?
+      block.call(front.data) if block_given?
       queue.push(front.left) unless front.left.nil?
       queue.push(front.right) unless front.right.nil?
-      queue.shift
     end
+    queue.shift
+    level_order(front, queue, values, &block)
     values unless block_given?
   end
-
-  # def level_order(current_node = @root, queue = [], values = [], &block)
-  #   return current_node if current_node.nil?
-
-  #   front = queue[0]
-  #   queue.push(current_node)
-  #   p queue
-  #   values << front.data unless front.nil?
-  #   queue.push(current_node.left) unless current_node.left.nil?
-  #   queue.push(current_node.right) unless current_node.right.nil?
-  #   queue.shift
-  #   level_order(front)
-
-  #   values
-  # end
 
   def preorder(current_node = @root, values = [], &block)
     return values if current_node.nil?

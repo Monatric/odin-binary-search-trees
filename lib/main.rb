@@ -7,6 +7,7 @@ test.insert(0)
 test.delete(8)
 test.pretty_print
 # p test.root.right
-# p test.level_order
-test.preorder { |e| puts "test #{e}" }
+test.level_order { |e| puts "test #{e}" }
+p test.level_order
+# test.preorder { |e| puts "test #{e}" }
 # p test.preorder
