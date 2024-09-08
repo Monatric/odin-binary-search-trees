@@ -136,4 +136,14 @@ class Tree
     inorder(current_node.right, values, &block)
     values unless block_given?
   end
+
+  def postorder(current_node = @root, values = [], &block)
+    return values if current_node.nil?
+
+    postorder(current_node.left, values, &block)
+    postorder(current_node.right, values, &block)
+    block.call(current_node.data) if block_given?
+    values << current_node.data
+    values unless block_given?
+  end
 end

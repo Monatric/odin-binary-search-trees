@@ -11,4 +11,7 @@ test.pretty_print
 # p test.level_order
 # test.preorder { |e| puts "test #{e}" }
 # p test.preorder
-p test.inorder
+# p test.inorder
+# test.inorder { |e| puts "test #{e}" }
+p test.postorder
+test.postorder { |e| puts "test #{e}" }
