@@ -130,10 +130,10 @@ class Tree
   def inorder(current_node = @root, values = [], &block)
     return values if current_node.nil?
 
-    block.call(current_node.data)
+    inorder(current_node.left, values, &block)
+    block.call(current_node.data) if block_given?
     values << current_node.data
-    preorder(current_node.left, values, &block)
-    preorder(current_node.right, values, &block)
+    inorder(current_node.right, values, &block)
     values unless block_given?
   end
 end
