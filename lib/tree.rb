@@ -73,7 +73,7 @@ class Tree
     if current_node.nil?
       return nil
     elsif value == current_node.data
-      return value
+      return current_node
     end
 
     if current_node.data > value
@@ -83,39 +83,40 @@ class Tree
     end
   end
 
-  # def level_order(current_node = @root, values = [])
-  #   # iteration version
-  #   queue = []
-  #   queue.push(current_node)
-  #   until queue.empty?
-  #     front = queue[0]
-  #     if block_given?
-  #       yield(front)
-  #     else
-  #       values << front.data
-  #     end
-  #     queue.push(front.left) unless front.left.nil?
-  #     queue.push(front.right) unless front.right.nil?
-  #     queue.shift
-  #   end
-  #   values unless block_given?
-  # end
-
-  def level_order(current_node = @root, queue = [@root], values = [], &block)
-    # recursive version
-    return values if current_node.nil?
-
-    front = queue[0]
-    values << front.data unless front.nil?
-    unless queue.empty?
-      block.call(front.data) if block_given?
+  def level_order
+    # iteration version
+    queue = []
+    values = []
+    queue.push(root)
+    until queue.empty?
+      front = queue[0]
+      if block_given?
+        yield(front)
+      else
+        values << front.data
+      end
       queue.push(front.left) unless front.left.nil?
       queue.push(front.right) unless front.right.nil?
+      queue.shift
     end
-    queue.shift
-    level_order(front, queue, values, &block)
     values unless block_given?
   end
+
+  # def level_order(current_node = @root, queue = [@root], values = [], &block)
+  #   # recursive version
+  #   return values if current_node.nil?
+
+  #   front = queue[0]
+  #   values << front.data unless front.nil?
+  #   unless queue.empty?
+  #     block.call(front.data) if block_given?
+  #     queue.push(front.left) unless front.left.nil?
+  #     queue.push(front.right) unless front.right.nil?
+  #   end
+  #   queue.shift
+  #   level_order(front, queue, values, &block)
+  #   values unless block_given?
+  # end
 
   def preorder(current_node = @root, values = [], &block)
     return values if current_node.nil?
@@ -145,5 +146,25 @@ class Tree
     block.call(current_node.data) if block_given?
     values << current_node.data
     values unless block_given?
+  end
+
+  def height(node)
+    queue = []
+    depth = -1 # start at -1 since it counts the first level
+    node = find(node)
+    queue.push(node, nil)
+    loop do
+      front = queue[0]
+      queue.shift
+      if front.nil?
+        depth += 1
+        queue.push(nil)
+        break if front.nil? && queue[0].nil?
+      else
+        queue.push(front.left) unless front.nil? || front.left.nil?
+        queue.push(front.right) unless front.nil? || front.right.nil?
+      end
+    end
+    depth
   end
 end
