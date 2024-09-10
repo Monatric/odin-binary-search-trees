@@ -150,14 +150,14 @@ class Tree
 
   def height(node)
     queue = []
-    depth = -1 # start at -1 since it counts the first level
+    height = -1 # start at -1 since it counts the first level
     node = find(node)
     queue.push(node, nil)
     loop do
       front = queue[0]
       queue.shift
       if front.nil?
-        depth += 1
+        height += 1
         queue.push(nil)
         break if front.nil? && queue[0].nil?
       else
@@ -165,6 +165,6 @@ class Tree
         queue.push(front.right) unless front.nil? || front.right.nil?
       end
     end
-    depth
+    height
   end
 end
