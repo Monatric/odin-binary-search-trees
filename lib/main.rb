@@ -17,3 +17,4 @@ test.pretty_print
 # test.postorder { |e| puts "test #{e}" }
 # p test.find(4)
 # p test.height(9)
+p test.depth(5)

@@ -167,4 +167,21 @@ class Tree
     end
     height
   end
+
+  def depth(node)
+    depth = 0
+    current_node = root
+
+    until node == current_node.data
+      current_node = if current_node.data > node
+                       current_node.left
+                     else
+                       current_node.right
+                     end
+      return nil if current_node.nil?
+
+      depth += 1
+    end
+    depth
+  end
 end
