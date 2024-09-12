@@ -8,11 +8,12 @@ test.insert(6)
 test.insert(8)
 test.insert(10)
 test.insert(11)
-# test.insert(13)
-# test.insert(14)
+test.insert(12)
+
+test.insert(13)
+test.insert(14)
 
 # test.delete(8)
-test.pretty_print
 # p test.root.right
 # test.level_order { |e| puts "test #{e}" }
 # p test.level_order
@@ -27,4 +28,7 @@ p test.postorder
 test.pretty_print
 
 # p test.depth(5)
+p test.balanced?
+p test.inorder
+p test.rebalance
 p test.balanced?

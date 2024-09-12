@@ -207,4 +207,10 @@ class Tree
     right_depth = root_right_subtree_height(node.right)
     [left_depth, right_depth].max + 1
   end
+
+  def rebalance
+    @end_arr = processed_arr.length - 1
+    self.root = build_tree(inorder, 0, inorder.length - 1)
+    pretty_print
+  end
 end
