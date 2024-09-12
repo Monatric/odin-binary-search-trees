@@ -184,4 +184,27 @@ class Tree
     end
     depth
   end
+
+  def balanced?(node = root)
+    left = root_left_subtree_height
+    right = root_right_subtree_height
+    difference = (left - right).abs
+    difference <= 1
+  end
+
+  def root_left_subtree_height(node = root.left)
+    return 0 if node.nil?
+
+    left_depth = root_left_subtree_height(node.left)
+    right_depth = root_left_subtree_height(node.right)
+    [left_depth, right_depth].max + 1
+  end
+
+  def root_right_subtree_height(node = root.right)
+    return 0 if node.nil?
+
+    left_depth = root_right_subtree_height(node.left)
+    right_depth = root_right_subtree_height(node.right)
+    [left_depth, right_depth].max + 1
+  end
 end
