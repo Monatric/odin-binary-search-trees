@@ -72,11 +72,6 @@ class Tree
   def find(value, current_node = @root)
     return current_node if current_node.nil? || value == current_node.data
 
-    if current_node.data > value
-      current_node.left = find(value, current_node.left)
-    else
-      current_node.right = find(value, current_node.right)
-    end
     current_node.data > value ? find(value, current_node.left) : find(value, current_node.right)
   end
 
